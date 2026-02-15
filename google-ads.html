@@ -11,7 +11,7 @@
 
 <style>
 
-/* ================= GLOBAL (SAME AS INDEX) ================= */
+/* ================= GLOBAL (EXACT INDEX STYLE) ================= */
 
 *{
   margin:0;
@@ -26,7 +26,7 @@ body{
   overflow-x:hidden;
 }
 
-/* SAME GRADIENT BACKGROUND */
+/* SAME RADIAL GRADIENT BACKGROUND */
 body::before{
   content:"";
   position:fixed;
@@ -38,7 +38,7 @@ body::before{
     radial-gradient(560px 480px at 58% 72%, rgba(59,45,255,.9), rgba(59,45,255,0) 70%);
 }
 
-/* ================= NAVBAR (SAME STYLE) ================= */
+/* ================= NAVBAR (WORKING LINKS) ================= */
 
 .navbar{
   position:fixed;
@@ -76,17 +76,39 @@ body::before{
 }
 
 .nav-menu a{
+  position:relative;
   color:#fff;
   text-decoration:none;
   font-family:'Share Tech',sans-serif;
   font-size:15px;
+  transition:.3s;
+}
+
+.nav-menu a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-4px;
+  width:0;
+  height:2px;
+  background:#f8a800;
+  transform:translateX(-50%);
+  transition:.3s;
+}
+
+.nav-menu a:hover{
+  color:#f8a800;
+}
+
+.nav-menu a:hover::after{
+  width:70%;
 }
 
 /* ================= PAGE HERO ================= */
 
 .page-hero{
-  padding-top:160px;
-  padding-bottom:80px;
+  padding-top:170px;
+  padding-bottom:70px;
   text-align:center;
 }
 
@@ -97,27 +119,24 @@ body::before{
 }
 
 .page-hero p{
-  max-width:750px;
+  max-width:800px;
   margin:0 auto;
   font-size:18px;
+  line-height:1.8;
   color:#e6e6e6;
-  line-height:1.7;
+  font-family:'Share Tech',sans-serif;
 }
 
-/* ================= CONTENT SECTIONS ================= */
+/* ================= CONTENT STRUCTURE ================= */
 
-.section{
-  padding:90px 0;
-}
-
-.section-box{
+.content-wrapper{
   max-width:1100px;
   margin:0 auto;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.25);
-  border-radius:20px;
-  padding:50px;
-  backdrop-filter:blur(14px);
+  padding:80px 20px;
+}
+
+.section{
+  margin-bottom:100px;
 }
 
 .section-title{
@@ -126,14 +145,34 @@ body::before{
   margin-bottom:20px;
 }
 
-.section p{
-  font-size:16px;
-  line-height:1.8;
-  color:#f0f0f0;
+.section-title::after{
+  content:"";
+  display:block;
+  width:70px;
+  height:3px;
+  background:#f8a800;
+  margin-top:10px;
 }
 
-/* ================= STATS ================= */
+.section p{
+  font-size:16px;
+  line-height:1.9;
+  color:#f0f0f0;
+  margin-bottom:20px;
+  text-align:justify;
+}
 
+/* GLASS BOX */
+.highlight-box{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  padding:40px;
+  border-radius:20px;
+  backdrop-filter:blur(14px);
+  margin-top:30px;
+}
+
+/* STATS */
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -141,30 +180,29 @@ body::before{
   margin-top:40px;
 }
 
-.stat{
+.stat-box{
   background:rgba(255,255,255,0.1);
   border:1px solid rgba(255,255,255,0.2);
-  border-radius:14px;
   padding:30px;
+  border-radius:16px;
   text-align:center;
 }
 
-.stat h3{
+.stat-box h3{
   font-size:32px;
   font-weight:800;
   margin-bottom:8px;
 }
 
-/* ================= CTA ================= */
-
+/* CTA */
 .cta-section{
-  padding:120px 0;
   text-align:center;
+  padding:120px 0;
 }
 
 .cta-btn{
   display:inline-block;
-  padding:16px 48px;
+  padding:18px 48px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,0.4);
   background:rgba(255,255,255,0.15);
@@ -179,19 +217,14 @@ body::before{
   color:#000;
 }
 
-/* ================= MOBILE ================= */
-
+/* MOBILE */
 @media(max-width:992px){
   .stats{
     grid-template-columns:1fr;
   }
 
-  .section-box{
-    padding:30px;
-  }
-
   .page-hero h1{
-    font-size:36px;
+    font-size:34px;
   }
 }
 
@@ -209,76 +242,113 @@ body::before{
 
   <div class="nav-menu">
     <a href="index.html">Home</a>
-    <a href="#">SEO</a>
-    <a href="#">Ads</a>
-    <a href="#">Contact</a>
+    <a href="index.html#seo">SEO</a>
+    <a href="index.html#ads">Ads</a>
+    <a href="index.html#pricing">Hire Me</a>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="page-hero">
-  <h1>Google Ads Strategy</h1>
-  <p style="font-family:'Share Tech',sans-serif;">
-    High-intent traffic. Measurable ROI. Scalable growth.
-    Google Ads connects your business to customers
-    exactly when they are searching for your solution.
+  <h1>Google Ads</h1>
+  <p>
+    Precision targeting. Intent-driven traffic. Measurable ROI.
+    Google Ads allows businesses to appear exactly when customers are actively searching —
+    turning attention into action and action into revenue.
   </p>
 </section>
 
-<!-- WHAT I DO -->
-<section class="section">
-  <div class="section-box">
-    <div class="section-title">What I Execute</div>
+<div class="content-wrapper">
 
-    <p style="font-family:'Share Tech',sans-serif;">
-      I build structured, conversion-focused Google Ads campaigns designed to capture
-      high-intent search traffic. From keyword research and audience segmentation
-      to landing page alignment and performance optimization — every step is built
-      for measurable results.
+  <!-- WHO IT'S FOR -->
+  <div class="section">
+    <div class="section-title">Why Google Ads Matters</div>
+
+    <p>
+      Google controls over 80% of the global search engine market. Every day,
+      billions of searches reflect real-time buyer intent — people looking for
+      solutions, services, and products. Google Ads allows businesses to position
+      themselves directly in front of this high-intent audience.
+    </p>
+
+    <p>
+      Unlike traditional advertising, search advertising reaches users who are
+      already interested. Instead of interrupting attention, it captures demand
+      at the exact moment it exists.
     </p>
 
     <div class="stats">
-      <div class="stat">
+      <div class="stat-box">
         <h3>80%+</h3>
         <p>Search Market Share</p>
       </div>
-      <div class="stat">
+      <div class="stat-box">
         <h3>High</h3>
-        <p>Intent Traffic</p>
+        <p>Buyer Intent</p>
       </div>
-      <div class="stat">
-        <h3>Lower</h3>
-        <p>Cost per Lead</p>
+      <div class="stat-box">
+        <h3>Data</h3>
+        <p>Driven Decisions</p>
       </div>
-      <div class="stat">
+      <div class="stat-box">
         <h3>Scalable</h3>
-        <p>Growth Strategy</p>
+        <p>Growth Model</p>
       </div>
     </div>
   </div>
-</section>
 
-<!-- STRATEGY -->
-<section class="section">
-  <div class="section-box">
-    <div class="section-title">Strategic Approach</div>
+  <!-- WHAT I DO -->
+  <div class="section">
+    <div class="section-title">What I Execute</div>
 
-    <p style="font-family:'Share Tech',sans-serif;">
-      My campaigns are built on structured keyword mapping, intent clustering,
-      negative keyword filtration, Quality Score optimization, and continuous
-      performance testing. This ensures efficient budget allocation,
-      higher CTR, improved conversion rates, and sustainable ROI growth.
+    <p>
+      My Google Ads strategy begins with structured keyword research,
+      competitive analysis, and intent mapping. I segment campaigns based on
+      search behavior, audience signals, and conversion potential.
+    </p>
+
+    <p>
+      Each campaign is built with clear architecture — optimized ad groups,
+      refined negative keyword strategy, compelling ad copy, and landing page alignment.
+      Performance tracking and conversion data are integrated from day one.
+    </p>
+
+    <div class="highlight-box">
+      <strong style="font-family:'Share Tech',sans-serif;">My Approach:</strong>
+      <br><br>
+      Structured campaign setup → Intent-based targeting → Continuous A/B testing →
+      Quality Score optimization → Conversion rate improvement →
+      Smart budget scaling based on performance.
+    </div>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="section">
+    <div class="section-title">Performance & Optimization</div>
+
+    <p>
+      Running Google Ads is not about activating campaigns — it’s about
+      continuous optimization. I monitor click-through rates, cost-per-click,
+      conversion rates, impression share, and search term reports to refine
+      performance.
+    </p>
+
+    <p>
+      Budget allocation is adjusted dynamically based on ROI signals.
+      Campaigns are scaled when profitable and refined when inefficiencies appear.
+      The objective is always sustainable growth — not short-term spikes.
     </p>
   </div>
-</section>
+
+</div>
 
 <!-- CTA -->
 <section class="cta-section">
   <h2 style="font-family:'Share Tech',sans-serif;margin-bottom:30px;">
-    Ready to Scale With Google?
+    Let’s Launch a Performance Campaign
   </h2>
 
-  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%20want%20to%20run%20Google%20Ads."
+  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%20want%20to%20discuss%20Google%20Ads."
      target="_blank"
      class="cta-btn">
      Start Campaign →
