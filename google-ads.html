@@ -11,7 +11,7 @@
 
 <style>
 
-/* ================= GLOBAL (EXACT INDEX STYLE) ================= */
+/* ================= GLOBAL ================= */
 
 *{
   margin:0;
@@ -20,13 +20,17 @@
   font-family:'Inter',sans-serif;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:#000;
   color:#fff;
   overflow-x:hidden;
 }
 
-/* SAME RADIAL GRADIENT BACKGROUND */
+/* SAME GRADIENT AS INDEX */
 body::before{
   content:"";
   position:fixed;
@@ -38,7 +42,7 @@ body::before{
     radial-gradient(560px 480px at 58% 72%, rgba(59,45,255,.9), rgba(59,45,255,0) 70%);
 }
 
-/* ================= NAVBAR (WORKING LINKS) ================= */
+/* ================= NAVBAR ================= */
 
 .navbar{
   position:fixed;
@@ -104,7 +108,68 @@ body::before{
   width:70%;
 }
 
-/* ================= PAGE HERO ================= */
+/* HAMBURGER */
+
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+
+.hamburger span{
+  width:22px;
+  height:2px;
+  background:#fff;
+}
+
+/* ================= MOBILE NAV ================= */
+
+.mobile-nav-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(4px);
+  display:none;
+  z-index:1500;
+}
+
+.mobile-nav{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:280px;
+  height:100%;
+  background:rgba(0,0,0,0.95);
+  padding:24px;
+  transition:right .35s ease;
+  z-index:1600;
+  display:flex;
+  flex-direction:column;
+}
+
+.mobile-nav.active{
+  right:0;
+}
+
+.mobile-nav-overlay.active{
+  display:block;
+}
+
+.mobile-nav-links{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  margin-top:40px;
+}
+
+.mobile-nav-links a{
+  color:#fff;
+  text-decoration:none;
+  font-family:'Share Tech',sans-serif;
+}
+
+/* ================= HERO ================= */
 
 .page-hero{
   padding-top:170px;
@@ -119,15 +184,14 @@ body::before{
 }
 
 .page-hero p{
-  max-width:800px;
+  max-width:820px;
   margin:0 auto;
   font-size:18px;
   line-height:1.8;
-  color:#e6e6e6;
   font-family:'Share Tech',sans-serif;
 }
 
-/* ================= CONTENT STRUCTURE ================= */
+/* ================= CONTENT ================= */
 
 .content-wrapper{
   max-width:1100px;
@@ -157,12 +221,13 @@ body::before{
 .section p{
   font-size:16px;
   line-height:1.9;
-  color:#f0f0f0;
-  margin-bottom:20px;
   text-align:justify;
+  margin-bottom:20px;
+  color:#f0f0f0;
 }
 
-/* GLASS BOX */
+/* HIGHLIGHT BOX */
+
 .highlight-box{
   background:rgba(255,255,255,0.12);
   border:1px solid rgba(255,255,255,0.25);
@@ -173,6 +238,7 @@ body::before{
 }
 
 /* STATS */
+
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -186,15 +252,31 @@ body::before{
   padding:30px;
   border-radius:16px;
   text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
 .stat-box h3{
   font-size:32px;
   font-weight:800;
-  margin-bottom:8px;
+  margin-bottom:10px;
+  min-height:40px;
+}
+
+.stat-box p{
+  font-size:14px;
+  font-family:'Share Tech',sans-serif;
+  margin:0;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 /* CTA */
+
 .cta-section{
   text-align:center;
   padding:120px 0;
@@ -217,8 +299,33 @@ body::before{
   color:#000;
 }
 
-/* MOBILE */
+/* FOOTER */
+
+.footer{
+  padding:80px 20px 40px;
+  border-top:1px solid rgba(255,255,255,0.2);
+  text-align:center;
+}
+
+.footer p{
+  font-size:14px;
+  font-family:'Share Tech',sans-serif;
+  opacity:.8;
+}
+
+/* RESPONSIVE */
+
 @media(max-width:992px){
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:768px){
+
+  .nav-menu{display:none;}
+  .hamburger{display:flex;}
+
   .stats{
     grid-template-columns:1fr;
   }
@@ -246,35 +353,44 @@ body::before{
     <a href="index.html#ads">Ads</a>
     <a href="index.html#pricing">Hire Me</a>
   </div>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#seo">SEO</a>
+    <a href="index.html#ads">Ads</a>
+    <a href="index.html#pricing">Hire Me</a>
+  </div>
 </div>
 
 <!-- HERO -->
 <section class="page-hero">
   <h1>Google Ads</h1>
   <p>
-    Precision targeting. Intent-driven traffic. Measurable ROI.
-    Google Ads allows businesses to appear exactly when customers are actively searching —
-    turning attention into action and action into revenue.
+    Google Ads is one of the most powerful digital advertising platforms in the world.
+    It allows businesses to reach potential customers at the exact moment they are
+    searching for products or services.
   </p>
 </section>
 
 <div class="content-wrapper">
 
-  <!-- WHO IT'S FOR -->
   <div class="section">
     <div class="section-title">Why Google Ads Matters</div>
-
     <p>
-      Google controls over 80% of the global search engine market. Every day,
-      billions of searches reflect real-time buyer intent — people looking for
-      solutions, services, and products. Google Ads allows businesses to position
-      themselves directly in front of this high-intent audience.
-    </p>
-
-    <p>
-      Unlike traditional advertising, search advertising reaches users who are
-      already interested. Instead of interrupting attention, it captures demand
-      at the exact moment it exists.
+      With billions of searches conducted every day, Google captures real-time user intent.
+      This makes it possible to position your business directly in front of high-intent
+      customers who are actively looking for solutions.
     </p>
 
     <div class="stats">
@@ -297,63 +413,63 @@ body::before{
     </div>
   </div>
 
-  <!-- WHAT I DO -->
   <div class="section">
-    <div class="section-title">What I Execute</div>
-
+    <div class="section-title">Campaign Strategy</div>
     <p>
-      My Google Ads strategy begins with structured keyword research,
-      competitive analysis, and intent mapping. I segment campaigns based on
-      search behavior, audience signals, and conversion potential.
-    </p>
-
-    <p>
-      Each campaign is built with clear architecture — optimized ad groups,
-      refined negative keyword strategy, compelling ad copy, and landing page alignment.
-      Performance tracking and conversion data are integrated from day one.
+      Every campaign begins with structured keyword research, competitor analysis,
+      audience segmentation, and landing page alignment.
+      My focus is on conversion-driven architecture — not vanity metrics.
     </p>
 
     <div class="highlight-box">
-      <strong style="font-family:'Share Tech',sans-serif;">My Approach:</strong>
-      <br><br>
-      Structured campaign setup → Intent-based targeting → Continuous A/B testing →
-      Quality Score optimization → Conversion rate improvement →
-      Smart budget scaling based on performance.
+      Structured setup → Smart targeting → Continuous optimization →
+      Performance tracking → ROI scaling.
     </div>
-  </div>
-
-  <!-- PERFORMANCE -->
-  <div class="section">
-    <div class="section-title">Performance & Optimization</div>
-
-    <p>
-      Running Google Ads is not about activating campaigns — it’s about
-      continuous optimization. I monitor click-through rates, cost-per-click,
-      conversion rates, impression share, and search term reports to refine
-      performance.
-    </p>
-
-    <p>
-      Budget allocation is adjusted dynamically based on ROI signals.
-      Campaigns are scaled when profitable and refined when inefficiencies appear.
-      The objective is always sustainable growth — not short-term spikes.
-    </p>
   </div>
 
 </div>
 
-<!-- CTA -->
 <section class="cta-section">
   <h2 style="font-family:'Share Tech',sans-serif;margin-bottom:30px;">
-    Let’s Launch a Performance Campaign
+    Ready to Scale with Google Ads?
   </h2>
 
-  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%20want%20to%20discuss%20Google%20Ads."
+  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%20want%20to%20run%20Google%20Ads."
      target="_blank"
      class="cta-btn">
      Start Campaign →
   </a>
 </section>
+
+<footer class="footer">
+  <p>© 2026 Lead Axis — Performance Driven Digital Marketing</p>
+</footer>
+
+<script>
+
+/* MOBILE NAV */
+
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const overlay = document.getElementById('mobileNavOverlay');
+
+hamburger.addEventListener('click', ()=>{
+  mobileNav.classList.add('active');
+  overlay.classList.add('active');
+});
+
+overlay.addEventListener('click', closeNav);
+
+function closeNav(){
+  mobileNav.classList.remove('active');
+  overlay.classList.remove('active');
+}
+
+document.querySelectorAll('.mobile-nav a').forEach(link=>{
+  link.addEventListener('click', closeNav);
+});
+
+</script>
 
 </body>
 </html>
